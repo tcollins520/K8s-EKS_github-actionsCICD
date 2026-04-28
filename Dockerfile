@@ -1,14 +1,22 @@
-# multi stage: build and run tomcat application
+# multistage Dockerfile for building and running the vprofile tomcat application
+# mulitistage builds allow us to separate the build environment from the runtime environment, which can help reduce the size of the final image and improve security by only including the necessary runtime dependencies in the final image.
+# we use maven to build the application in the first stage, and then copy the built war file to the tomcat image in the second stage
 FROM maven:3.9.9-eclipse-temurin-11 AS build_image
 WORKDIR /vprofile-project
 COPY . .    
 RUN mvn install -DskipTests
 
+# in the second stage, we use the tomcat image to run the application
 FROM tomcat:9-jre11
 LABEL "Project"="Vprofile"
 LABEL "Author"="Tina"
+
+# remove the default tomcat webapps to avoid conflicts with our application
 RUN rm -rf /usr/local/tomcat/webapps/*
+
+# copy the built war file from the first stage to the tomcat webapps default directory
 COPY --from=build_image vprofile-project/target/vprofile-v2.war /usr/local/tomcat/webapps/ROOT.war
 
+# expose the application on port 8080 and start the tomcat server
 EXPOSE 8080
 CMD ["catalina.sh", "run"]

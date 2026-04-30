@@ -13,7 +13,7 @@ ________________________________________
 •	Docker
 •	Amazon ECR
 •	kubectl
-•	Jenkins (CI/CD integration)
+•	GitHub Actions (CI/CD integration)
 ________________________________________
 ⚙️ Deployment Workflow
 1.	Build Docker image
@@ -25,7 +25,7 @@ ________________________________________
 📂 Kubernetes Resources
 •	Deployment
 •	Service
-•	Ingress (optional)
+•	Ingress 
 •	Secrets (ECR pull secret)
 ________________________________________
 🔐 Image Pull Configuration
@@ -44,8 +44,6 @@ ________________________________________
 🚀 Future Improvements
 •	Helm chart implementation
 •	Auto-scaling with HPA
-•	Monitoring with Prometheus & Grafana
-•	GitOps with ArgoCD
 ________________________________________
 👩🏽‍💻 Author
 Tina Collins

@@ -2,7 +2,7 @@
 # mulitistage builds allow us to separate the build environment from the runtime environment, which can help reduce the size of the final image and improve security by only including the necessary runtime dependencies in the final image.
 # we use maven to build the application in the first stage, and then copy the built war file to the tomcat image in the second stage
 FROM maven:3.9.9-eclipse-temurin-11 AS build_image
-WORKDIR /vprofile-project
+WORKDIR /app
 COPY . .    
 RUN mvn install -DskipTests
 
